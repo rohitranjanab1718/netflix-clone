@@ -2,11 +2,12 @@ import { useRef, useState } from "react";
 import Header from "./header";
 import {validateData} from "../utils/validate"
 import { auth } from "../utils/firebase";
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 const Login = () =>{
     const [isSignInForm,setIsSignForm] =useState('true');
     const [errorMessage,setErrorMessage] = useState(null);
     const email = useRef(null);
+    const name = useRef(null);
     const password = useRef(null);
     //console.log(email);
     const handleButttonClick = () =>{
@@ -19,6 +20,8 @@ const Login = () =>{
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;
+                    console.log(user);
+                    updateProfile(user,{displayName:name.current.value,photoURL:"https://avatars.githubusercontent.com/u/12824231?v=4"});
                     console.log(user);
                     // ...
                 })
@@ -60,6 +63,7 @@ const Login = () =>{
             {
                 !isSignInForm && (<input
                 type="text"
+                ref= {name}
                 placeholder="Full Name"
                 className="p-4 my-4 w-full bg-gray-700"
                 />)

@@ -1,7 +1,10 @@
+import Header from "./header";
+
 const Browse =()=>{
+    
     return(
         <div>
-            browse
+            <Header/>
         </div>
     )
 }
