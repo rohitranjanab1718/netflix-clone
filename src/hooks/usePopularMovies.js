@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utils/constants"
-import { addPopularMovies } from "../utils/movieslice";
+import { addPopularMovies } from "../utils/moviesSlice";
 import { useEffect } from "react";
 const usePopularMovies = () =>{
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ const usePopularMovies = () =>{
     }
 
     useEffect(()=>{
+        console.log("rohit");
         getPopularMovies();
     },[]);
 }

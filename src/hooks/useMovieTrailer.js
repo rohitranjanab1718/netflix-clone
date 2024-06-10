@@ -1,23 +1,49 @@
-import { useEffect } from 'react';
-import { API_OPTIONS } from '../utils/constants'
-import { useDispatch } from 'react-redux'
-import { addTrailerVideo } from '../utils/movieslice'
+// import { useEffect } from 'react';
+// import { API_OPTIONS } from '../utils/constants'
+// import { useDispatch } from 'react-redux'
+// import { addTrailerVideo } from '../utils/movieslice'
+
+// const useMovieTrailer = (movieId) => {
+//   const dispatch = useDispatch();
+//   const getMovieTrailer=async()=>{
+//     console.log("rohit");
+//     const data = await fetch('https://api.themoviedb.org/3/movie/' +movieId +'/videos?language=en-US', API_OPTIONS);
+//     const json = await data.json();
+//     console.log(json); 
+//     const filterData = json.results.filter((video)=>video.type==="Trailer");
+//     const trailer = filterData.length?filterData[0]:json.results[0];
+//     dispatch(addTrailerVideo(trailer)); 
+//   }
+
+//   useEffect(()=>{
+//     getMovieTrailer();
+//   },[])
+// }
+
+// export default useMovieTrailer;
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { API_OPTIONS } from "../utils/constants";
+import { addTrailerVideo } from "../utils/moviesSlice";
 
 const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
-  const getMovieTrailer=async()=>{
-    console.log("rohit");
-    const data = await fetch('https://api.themoviedb.org/3/movie/' +movieId +'/videos?language=en-US', API_OPTIONS);
+  const getMovieVideos = async () => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/movie/" +
+        movieId +
+        "/videos?language=en-US",
+      API_OPTIONS
+    );
     const json = await data.json();
-    console.log(json); 
-    const filterData = json.results.filter((video)=>video.type==="Trailer");
-    const trailer = filterData.length?filterData[0]:json.results[0];
-    dispatch(addTrailerVideo(trailer)); 
-  }
 
-  useEffect(()=>{
-    getMovieTrailer();
-  },[])
-}
+    const filterData = json.results.filter((video) => video.type === "Trailer");
+    const trailer = filterData.length ? filterData[0] : json.results[0];
+    dispatch(addTrailerVideo(trailer));
+  };
+  useEffect(() => {
+    getMovieVideos();
+  }, []);
+};
 
 export default useMovieTrailer;
