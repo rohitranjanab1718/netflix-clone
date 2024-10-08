@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
-import useMovieTrailer from "../hooks/useMovieTrailer";
-
-const VideoBackground = ({ movieId }) => {
-  const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
-
+import React from 'react'
+import useMovieTrailer from '../hooks/useMovieTrailer';
+import { useSelector } from 'react-redux';
+const VideoBackGround = ({movieId}) => {
+  const trailerVideo = useSelector((store)=>store.movie.trailerVideo)
   useMovieTrailer(movieId);
-
+  console.log(trailerVideo);
   return (
     <div className=" w-screen">
       <iframe
@@ -19,6 +18,7 @@ const VideoBackground = ({ movieId }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
     </div>
-  );
-};
-export default VideoBackground;
+  )
+}
+
+export default VideoBackGround;
